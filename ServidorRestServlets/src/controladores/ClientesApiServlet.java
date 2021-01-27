@@ -44,7 +44,6 @@ public class ClientesApiServlet extends HttpServlet {
 			response.getWriter().write(gson.toJson(clientes.get(id)));
 		}
 		
-		
 	}
 	
 	
