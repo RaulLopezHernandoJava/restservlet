@@ -1,4 +1,5 @@
-const URL = '/ServidorRestServlets/api/clientes/';
+//const URL = '/ServidorRestServlets/api/clientes/';
+const URL = '/ServidorRestServlets/api/v2/clientes/';
 
 
 window.onload = function() {
@@ -21,10 +22,22 @@ window.onload = function() {
 
 		console.log(cliente, typeof cliente);
 
+
 		if (id) {
-			fetch(URL + id, { method: 'PUT', body: JSON.stringify(cliente) }).then(() => listar());
+			fetch(URL + id, {
+				method: 'PUT',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify(cliente)
+			}).then(() => listar());
 		} else {
-			fetch(URL, { method: 'POST', body: JSON.stringify(cliente) }).then(() => listar());
+			fetch(URL, {
+		    method: 'POST', 
+            headers: {
+					'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(cliente) }).then(() => listar());
 		}
 	}
 
@@ -60,8 +73,8 @@ async function listar() {
 							<td>${cliente.nombre}</td >
 							<td>${cliente.apellidos}</td>
 							<td>
-								<a href="javascript:editar(${cliente.id})">Editar</a>
-								<a href="javascript:borrar(${cliente.id})">Borrar</a>
+								<a class="btn btn-warning" href="javascript:editar(${cliente.id})">Editar</a>
+								<a class="btn btn-danger" href="javascript:borrar(${cliente.id})">Borrar</a>
 							</td>`
 		tbody.appendChild(fila);
 	});
